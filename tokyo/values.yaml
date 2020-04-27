@@ -1,0 +1,12 @@
+# 环境
+namespace: [environment]
+# Pod 副本数量
+replicaCount: 1
+# 服务名
+serviceName: [service]
+# 镜像仓库地址
+imageRepository: [repository]
+# 镜像 tag，生产环境对应 stable，测试环境对应 latest
+imageTag: [tag]
+# 域名
+host: [host]

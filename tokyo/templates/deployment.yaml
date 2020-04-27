@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.serviceName }}-deployment
+  labels:
+    app: tokyo
+    service: {{ .Values.serviceName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: tokyo
+      service: {{ .Values.serviceName }}
+  template:
+    metadata:
+      labels:
+        app: tokyo
+        service: {{ .Values.serviceName }}
+    spec:
+      nodeSelector:
+        node: slave
+      containers:
+      - name: {{ .Values.serviceName }}
+        image: "{{ .Values.imageRepository }}/{{ .Values.serviceName }}:{{ .Values.imageTag }}"
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+          - name: env
+            mountPath: "/project/.env"
+            subPath: ".env"
+            readOnly: true
+          - name: phpfpm
+            mountPath: "/usr/local/etc/php-fpm.d/www.conf"
+            subPath: "www.conf"
+            readOnly: true
+      - name: nginx
+        image: nginx:mainline-alpine
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: nginxconf
+            mountPath: "/etc/nginx/conf.d/default.conf"
+            subPath: "default.conf"
+            readOnly: true
+      imagePullSecrets:
+        - name: {{ .Values.serviceName }}-ecr-secret
+      volumes:
+        - name: nginxconf
+          configMap:
+            name: {{ .Values.serviceName }}-nginx-configmap
+        - name: env
+          configMap:
+            name: {{ .Values.serviceName }}-env-configmap
+        - name: phpfpm
+          configMap:
+            name: {{ .Values.serviceName }}-phpfpm-configmap

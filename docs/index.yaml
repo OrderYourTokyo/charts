@@ -3,12 +3,12 @@ entries:
   tokyo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-04-27T23:56:10.53912+08:00"
+    created: "2020-04-28T00:06:46.091377+08:00"
     description: A Helm chart for Kubernetes
-    digest: d2def89a43bdb637648673fc9a07826c9849c82f8cb3b5f67fdd307a5ee5390c
+    digest: 7521c21ae6e105e50d9c0daca799ba5c2548121bdeabd06b633b9217c88c64e3
     name: tokyo
     type: application
     urls:
     - https://orderyourtokyo.github.io/charts/tokyo-0.1.0.tgz
     version: 0.1.0
-generated: "2020-04-27T23:56:10.530933+08:00"
+generated: "2020-04-28T00:06:46.089223+08:00"
