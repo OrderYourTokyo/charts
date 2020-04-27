@@ -10,3 +10,8 @@ imageRepository: [repository]
 imageTag: [tag]
 # 域名
 host: [host]
+# PHP-FPM 资源配额
+resources:
+  limits:
+    memory: "128Mi"
+    cpu: "100m"
