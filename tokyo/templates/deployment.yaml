@@ -52,7 +52,7 @@ spec:
             subPath: "default.conf"
             readOnly: true
       imagePullSecrets:
-        - name: {{ .Values.serviceName }}-ecr-secret
+        - name: tokyo-image-pull-secret
       volumes:
         - name: nginxconf
           configMap:
