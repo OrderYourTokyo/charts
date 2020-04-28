@@ -48,8 +48,11 @@ spec:
             successThreshold: 1
             failureThreshold: 3
           env:
-          - name: MYSQL_RANDOM_ROOT_PASSWORD
-            value: 'yes'
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.service.name }}-secret
+                key: mysql-root-password
           - name: MYSQL_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -57,9 +60,9 @@ spec:
                 key: mysql-password
                 optional: true
           - name: MYSQL_USER
-            value: 'tokyo'
+            value: ""
           - name: MYSQL_DATABASE
-            value: 'tokyo'
+            value: ""
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
