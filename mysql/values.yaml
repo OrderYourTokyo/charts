@@ -22,3 +22,7 @@ resources:
 
 nodeSelector:
   node: master
+
+secret:
+  mysqlRootPassword: 'NTdRcVplaDBRaw=='
+  mysqlPassword: 'NUg4WldVTFV0cQ=='
