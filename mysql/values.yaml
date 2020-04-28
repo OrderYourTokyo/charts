@@ -1,0 +1,24 @@
+# Default values for mysql.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: db
+
+replicaCount: 1
+
+image:
+  repository: mysql
+  pullPolicy: IfNotPresent
+
+service:
+  name: mysql
+  type: ClusterIP
+  port: 3306
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+nodeSelector:
+  node: master

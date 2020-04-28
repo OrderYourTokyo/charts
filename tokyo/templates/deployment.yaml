@@ -7,6 +7,8 @@ metadata:
     service: {{ .Values.serviceName }}
   namespace: {{ .Values.namespace }}
 spec:
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: tokyo
