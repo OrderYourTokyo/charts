@@ -3,7 +3,7 @@ entries:
   mysql:
   - apiVersion: v2
     appVersion: 5.7.30
-    created: "2020-04-29T14:30:24.564437+08:00"
+    created: "2020-05-01T08:45:10.379286+08:00"
     description: A Helm chart for Kubernetes
     digest: a8d04cbbaefe643d751997a157da10abe361c2c95e587dc46881085c3b0ab23b
     name: mysql
@@ -14,12 +14,12 @@ entries:
   tokyo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-04-29T14:30:24.570938+08:00"
+    created: "2020-05-01T08:45:10.381374+08:00"
     description: A Helm chart for Kubernetes
-    digest: 8963581aef4796738c1e6d65a974864e2c52d39ee6bab26dc34e636ea0d2f92e
+    digest: 1494e3052aec54827b1c8183472ebf54121f2c40b3859f51587d36dae68a4519
     name: tokyo
     type: application
     urls:
     - https://orderyourtokyo.github.io/charts/tokyo-0.1.0.tgz
     version: 0.1.0
-generated: "2020-04-29T14:30:24.55942+08:00"
+generated: "2020-05-01T08:45:10.374869+08:00"

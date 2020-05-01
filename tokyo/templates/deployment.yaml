@@ -33,12 +33,10 @@ spec:
         - containerPort: 9000
         volumeMounts:
           - name: env
-            mountPath: "/project/.env"
-            subPath: ".env"
+            mountPath: /project
             readOnly: true
           - name: phpfpm
-            mountPath: "/usr/local/etc/php-fpm.d/www.conf"
-            subPath: "www.conf"
+            mountPath: /usr/local/etc/php-fpm.d
             readOnly: true
       - name: nginx
         image: nginx:mainline-alpine
@@ -50,8 +48,7 @@ spec:
         - containerPort: 80
         volumeMounts:
           - name: nginxconf
-            mountPath: "/etc/nginx/conf.d/default.conf"
-            subPath: "default.conf"
+            mountPath: /etc/nginx/conf.d
             readOnly: true
       imagePullSecrets:
         - name: tokyo-image-pull-secret
@@ -59,9 +56,18 @@ spec:
         - name: nginxconf
           configMap:
             name: {{ .Values.serviceName }}-nginx-configmap
+            items:
+              - key: default.conf
+                path: default.conf
         - name: env
           configMap:
             name: {{ .Values.serviceName }}-env-configmap
+            items:
+              - key: .env
+                path: .env
         - name: phpfpm
           configMap:
             name: {{ .Values.serviceName }}-phpfpm-configmap
+            items:
+              - key: www.conf
+                path: www.conf
