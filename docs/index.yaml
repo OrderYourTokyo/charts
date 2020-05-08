@@ -3,7 +3,7 @@ entries:
   mysql:
   - apiVersion: v2
     appVersion: 5.7.30
-    created: "2020-04-29T14:30:24.564437+08:00"
+    created: "2020-05-08T10:27:21.738275+08:00"
     description: A Helm chart for Kubernetes
     digest: a8d04cbbaefe643d751997a157da10abe361c2c95e587dc46881085c3b0ab23b
     name: mysql
@@ -11,10 +11,21 @@ entries:
     urls:
     - https://orderyourtokyo.github.io/charts/mysql-0.1.0.tgz
     version: 0.1.0
+  swagger:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2020-05-08T10:27:21.740411+08:00"
+    description: A Helm chart for Kubernetes
+    digest: fc1fc5a7f128ace555c2b2c19286f3b88fc801081f7136eaabbe5ea6db57677e
+    name: swagger
+    type: application
+    urls:
+    - https://orderyourtokyo.github.io/charts/swagger-0.1.0.tgz
+    version: 0.1.0
   tokyo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-04-29T14:30:24.570938+08:00"
+    created: "2020-05-08T10:27:21.745954+08:00"
     description: A Helm chart for Kubernetes
     digest: 8963581aef4796738c1e6d65a974864e2c52d39ee6bab26dc34e636ea0d2f92e
     name: tokyo
@@ -22,4 +33,4 @@ entries:
     urls:
     - https://orderyourtokyo.github.io/charts/tokyo-0.1.0.tgz
     version: 0.1.0
-generated: "2020-04-29T14:30:24.55942+08:00"
+generated: "2020-05-08T10:27:21.732267+08:00"

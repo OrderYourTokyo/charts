@@ -1,0 +1,11 @@
+# Default values for swagger.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: swaggerapi/swagger-ui:v3.25.2
+  pullPolicy: IfNotPresent
+
+host: swagger.tokyo.sshcloud.wang
+serviceName: swagger
+namespace: default
