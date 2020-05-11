@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: drone-configmap
+  labels:
+    app: drone
+  namespace: {{ .Values.namespace }}
+data:
+  DRONE_SERVER_HOST: tokyo.sshcloud.wang
+  DRONE_SERVER_PROTO: https
+  DRONE_USER_CREATE: username:Romeo0906,admin:true
+  DRONE_USER_FILTER: OrderYourTokyo
+  DRONE_RUNNER_AGENT_HOST: jumpbox.tokyo.sshcloud.wang

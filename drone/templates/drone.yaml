@@ -1,0 +1,162 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: droneconfigmap
+  labels:
+    app: drone
+  namespace: default
+data:
+  DRONE_SERVER_HOST: tokyo.sshcloud.wang
+  DRONE_SERVER_PROTO: https
+  DRONE_USER_CREATE: username:Romeo0906,admin:true
+  DRONE_USER_FILTER: OrderYourTokyo
+  DRONE_RUNNER_AGENT_HOST: jumpbox.tokyo.sshcloud.wang
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dronesecret
+  labels:
+    app: drone
+  namespace: default
+data:
+  DRONE_GITHUB_CLIENT_ID: OTFiNzA1N2EzZmFkMmI0ZmQ5NGE=
+  DRONE_GITHUB_CLIENT_SECRET: ZjllN2NmMDQyNTYxN2EyMWIzMGIyYTYyMjBhNmMwZWFkODRiNDU3OQ==
+  DRONE_RPC_SECRET: YmVhMjZhMjIyMWZkbm1jZDBlYTM4NzJzY2M0NDVlY2E2
+  DRONE_RUNNER_AGENT_USER: ZHJvbmVCdWlsZGVy
+  DRONE_RUNNER_AGENT_PASS: RXg4M3p6SnUxa0NVMTI3aDBWRHpDTTJhTHBJMDBSbEk=
+  DRONE_RUNNER_AGENT_PUBK: c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQUJBQUFCQVFDMU9WRnorSDVoOUpBT0RJT3FHZk5HMDZQRGtOL2VrM3VmNWQyeGhKUGdZeTNqOTMzSys5bzB0SSsvYllQTjdDbGZjbFpLaHliVUZqTHNRRGtjbHlORjkxTVNaYm9BNzlhWTNFeHJQZXprUDA5T0I2MmcvaXRyb1k3SkdZdUFWT2h6enZHOVdjQVV3SEhlWXdQeEl4QnJEMVIyY2h0dXRiY3F5V0VlQjliZDVQdGRuZ2xEVFFKZDE4enFMK0JuL3RvS1ltWG10MUt2UWY0eDE4V3NhdHZ0VFFPVXV3UVV3dEwyS25tbUZrRFhFeXh5SkJidE9SdVUyak9SU0ZxSkpDZ3N3UmRrNmtFMWZxdHZicnArTFltU0FlRloveTUvako4c0VyV3pjWDRSbnJsSWxPYzVkRlAzN20xK1BvNkxVSzZOYlVxQ1VBVGJhN3ZQL1BvQ2NxelQgZHJvbmVCdWlsZGVyQGp1bXBib3gK
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tokyo.sshcloud.wang-tls
+  namespace: kube-system
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZYVENDQkVXZ0F3SUJBZ0lTQXloUGNLUFdPa3pTcUhRdUswNElKMnlCTUEwR0NTcUdTSWIzRFFFQkN3VUEKTUVveEN6QUpCZ05WQkFZVEFsVlRNUll3RkFZRFZRUUtFdzFNWlhRbmN5QkZibU55ZVhCME1TTXdJUVlEVlFRRApFeHBNWlhRbmN5QkZibU55ZVhCMElFRjFkR2h2Y21sMGVTQllNekFlRncweU1EQTBNakl3TWpJNU1UbGFGdzB5Ck1EQTNNakV3TWpJNU1UbGFNQjR4SERBYUJnTlZCQU1URTNSdmEzbHZMbk56YUdOc2IzVmtMbmRoYm1jd2dnRWkKTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFEcS9paElob2grcDJnM1FrRnlmcWFFdnJNagpqVm9EaW5XbXhQb09HY2pRVFNnM1phSUNIdDlab1hNeCtGM3Fnb1RGYkNiTXlLU2hBcm5YN1ZXTHd5SDNLaGMxCm1yUlpMckxRcE1OZ0xWc1Raczh5TWp6UzRQanFFTkRvMlhtQ0pBRTZwM1ZZanZISFQ3ZzlBQklZK2ZZZkJCdkMKcytXNTl2RnA5ZHZpVHZVdUpYdVM5R3VIbThoMkxCUWpEUDZUZFl4RnlkYm9HOVBhZXRXRXZCSjU3V1Y4RlNsKwphaTJ1R0JzZXNnOEt1Qjc3Qjdhd0pNOEgwQ0FudTZKRTI5a2lTWGducHdXQThYSlN4UG0yQXNONTY3M3UreXk5CitSUWs3eTlFdWwrVjh1SzVrWkg4d3Z0VmN2bEZWcDh2WWtLK0NDRm5FNm9YQWM0RTRkeXVPTlE0R0Y2dEFnTUIKQUFHamdnSm5NSUlDWXpBT0JnTlZIUThCQWY4RUJBTUNCYUF3SFFZRFZSMGxCQll3RkFZSUt3WUJCUVVIQXdFRwpDQ3NHQVFVRkJ3TUNNQXdHQTFVZEV3RUIvd1FDTUFBd0hRWURWUjBPQkJZRUZFYVJsVkxadDU5OEpvUHVET2o2ClNoejJSMHYxTUI4R0ExVWRJd1FZTUJhQUZLaEthbU1FZmQyNjV0RTV0NlpGWmUvenFPeWhNRzhHQ0NzR0FRVUYKQndFQkJHTXdZVEF1QmdnckJnRUZCUWN3QVlZaWFIUjBjRG92TDI5amMzQXVhVzUwTFhnekxteGxkSE5sYm1OeQplWEIwTG05eVp6QXZCZ2dyQmdFRkJRY3dBb1lqYUhSMGNEb3ZMMk5sY25RdWFXNTBMWGd6TG14bGRITmxibU55CmVYQjBMbTl5Wnk4d0hnWURWUjBSQkJjd0ZZSVRkRzlyZVc4dWMzTm9ZMnh2ZFdRdWQyRnVaekJNQmdOVkhTQUUKUlRCRE1BZ0dCbWVCREFFQ0FUQTNCZ3NyQmdFRUFZTGZFd0VCQVRBb01DWUdDQ3NHQVFVRkJ3SUJGaHBvZEhSdwpPaTh2WTNCekxteGxkSE5sYm1OeWVYQjBMbTl5WnpDQ0FRTUdDaXNHQVFRQjFua0NCQUlFZ2ZRRWdmRUE3d0IyCkFHOVRkcXd4OERFWjJKa0FwRkVWLzNjVkhCSFpBc0VBS1FhTnNnaWFOOWtUQUFBQmNaL3V5N0FBQUFRREFFY3cKUlFJaEFNQ3l5UFR3WHh6RTU0UllVYnZWVC9sam01STdjUGpkbVFzTmNZTTNTeU5HQWlCZ05nQUtqZmFhTGRXUQpPQlZCQ2dhM3M5TWx3U216QlA0UTdFenZZMnJ2N2dCMUFBZTNYQnZsZldqLzhiREdIU01WeDdybVYzeFhsTGRxCjdyeGhPaHBwMDZJY0FBQUJjWi91eTY4QUFBUURBRVl3UkFJZ0piL1p4R3N6OTV4M2hkNVJjd05SQVd4OC9xamEKN3ZiZGFpVFR4RlNIOTRzQ0lGS0lmWXJrZkVrb1Q3YkxpMmJyUXd6NE05eHljQzY0RXJTYjk5T3dLeXlOTUEwRwpDU3FHU0liM0RRRUJDd1VBQTRJQkFRQTBmMUdDS2VxTGNKUncwcncvYm9QWEFxMnFFUFY1aWMzZFZlYlBkbHdwCnRCeksvR1FtV3htRHc5cHNFRVZMblRnMDJzWlJYNnNhMm52djI1eWl1WUcycy9JN1dyY0kveFdJMXJ6bGhCa0kKaWcrbEhlZ0djZ3c0NmQvdE0vbXpRNXJuUVdDT1BycTVGQ1lqbnJPb2o3eHRXdlFibnJsTkh0WUw5NWZydlhPbQpORzZOakFmeWozNWt0V2JUZzVRSWZsUHJQNzYyMmxVeUNOS2paRGdoN3REbDRkMW4rekxwSnJnQ1IrMXB1ckVQCmVTNm1DN2JVRy9oRVJmSllKQ1JhcjMweW92YkRsbklDTEdFNlBDaUdpZWpFNlU3NEpaOU91TVYva29tbERQU3kKWEpidkl1a0tac05VVGlnMjlnUTNBM3RFR2JMdDUramJOLzQrNS9xUUtjaVQKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQ==
+  tls.key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2QUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktZd2dnU2lBZ0VBQW9JQkFRRHEvaWhJaG9oK3AyZzMKUWtGeWZxYUV2ck1qalZvRGluV214UG9PR2NqUVRTZzNaYUlDSHQ5Wm9YTXgrRjNxZ29URmJDYk15S1NoQXJuWAo3VldMd3lIM0toYzFtclJaTHJMUXBNTmdMVnNUWnM4eU1qelM0UGpxRU5EbzJYbUNKQUU2cDNWWWp2SEhUN2c5CkFCSVkrZllmQkJ2Q3MrVzU5dkZwOWR2aVR2VXVKWHVTOUd1SG04aDJMQlFqRFA2VGRZeEZ5ZGJvRzlQYWV0V0UKdkJKNTdXVjhGU2wrYWkydUdCc2VzZzhLdUI3N0I3YXdKTThIMENBbnU2SkUyOWtpU1hnbnB3V0E4WEpTeFBtMgpBc041NjczdSt5eTkrUlFrN3k5RXVsK1Y4dUs1a1pIOHd2dFZjdmxGVnA4dllrSytDQ0ZuRTZvWEFjNEU0ZHl1Ck9OUTRHRjZ0QWdNQkFBRUNnZ0VBSXppUVU1eDhjVlZJbUwyd3Z3Y3VFS2ZmaERUZnVMZWtQaWg0WFN3dXJjL2UKdHZ6ZjdTYnc3WWQyRTFlSlJnaWxlMHlrUFIzV2xQNXFXZXVMM3B5UzV1K1RWbmkzVHNXaHpnVmY5amFlRjdpWgpWZ256RlYxY1dZTEhPUnM5YTh6WE5WSWJrN2dyRTJkR3N6ZmpQb1NhaDlnUERCMzRFT2tyRW1saitWWEJ5RlpTCjJad0ZaS1lrcERsclcrdkh3WjVseExyRTNhSzdxRUxveHF1QnFZNytGcGZ3T2NTRklpc3NFN3h2L29iVmlsWHAKTVZzSG94cDRlZ1ZlV284QlQ5Y0JVVFEwOEF1QXIrRFRmaVo1UTA0ZHVRQUIvYU9vcVFWSnRwVWNBMks1UG1TLwo1dlpLanZNdmdOUHFzZUFOeXZZR3VDVEVMQnhmeFhhMDFwSFdKVFZsbVFLQmdRRDRCTC96NFp2NUpOeFhCTnlMClRYbVZHU2pPUnJvb1lQUE15bzduYWl6RFBsMFl3dHRtbHdLSkZYeFdMZ3AzUi9EQ3pWNC9SOEl1WmVjNXAzYVgKdTdFNzE3dGxkbzkxeUFjY1p1eDN2SnNhWjQ0UC9GVy9qVitBVDM1My9lS0lQVWV1QTcySXpwK1FkOEUrVHVHbgpuUVAyZmRuR1RkcmQ2dEl6NVR1cXB2WFZ5UUtCZ1FEeWpoajQwZTZuUytPV0JDRlVhWUpac3I0ckllUHlKRTlICnRESENiWGxGdG1EczZXR2FGVEY5U3dXOGJ2WkdZdWVpNzk5YVo0bnM3RUdQTWVaeXF4d2Ezb2ZnT1gzRTNSd3YKb0U5ZUJXNTZueXRPWCtBd3VEZmVQTm13RGwydEJ2T1BJclYyZEtyVkNBNDZJb0VZeGZLUWlRRjd4cFZ6UEptdwpSVTV1VXQyRHhRS0JnRkJXMFlzQmdOR3lwQUU0SE95dTJ2eDJHdWErdUZ5T0UwczZMaEkrTFdQTlZzREhsZVJrCmREak5rZW9rbmRWSG8zQ21yNm5WNTh1NXpLMjdWa29PVFhueUJzejJHOEJ1WEFkU083VUpqa0IrWE9GR3ZzdisKMG5td3htbTkvdHhjNVZRejkvaFIzaFFoQnFMVlVIbEgvbG1oS0tMNDR6WFJjK2ZGa0k5VjUvb3BBb0dBQ1BFVQpHcGdpcENnNEM1KzdXdEZJN09XWi9SMFN1aXA4Z2JneTNXZ0x3SFlvdkpNZDlnQXlBdHh4S2JFdGd3ckNYMDlZCmZJeTBtUGRjczFxemxDYWFzcUxoZjNLZklGTEdaenNSc2ZXaFRRUHhKTUtFRVVlNVI0Z1d2bGJKUFVlMFV1S0UKcmdrL0F2dDVDc3VhMXI3MVlqNnF2MVZpelF5KzNiQ3dZNERLaWNFQ2dZQnVpTkJHZmx0cVdOYzEzRytiNitSYworY2JFS09QdS9Oa2VXOTBHcjRCVkJRVnpRRFFuSmdaTFRWcFhjcW1EUmNLNGU2eGp1NUc2elRnUjdkSllPNXpBCkVVNk5zMUZVRUtDTjFYTWlwYzlQVk9uSmVaU1RENzNzU1dHMUpzU1lxdkxCUktPS05FMTFJbXVQUGhibmFBMXUKdHdVVGdTLzZ6N1R3akNadzdnNEFJQT09Ci0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0=
+type: kubernetes.io/tls
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drone
+  template:
+    metadata:
+      labels:
+        app: drone
+    spec:
+      nodeSelector:
+        node: master
+      containers:
+      - name: drone
+        image: drone/drone:1
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        volumeMounts:
+          - mountPath: /data
+            name: drone-volume
+        env:
+          - name: DRONE_GITHUB_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: dronesecret
+                key: DRONE_GITHUB_CLIENT_ID
+          - name: DRONE_GITHUB_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: dronesecret
+                key: DRONE_GITHUB_CLIENT_SECRET
+          - name: DRONE_RPC_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: dronesecret
+                key: DRONE_RPC_SECRET
+          - name: DRONE_SERVER_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: droneconfigmap
+                key: DRONE_SERVER_HOST
+          - name: DRONE_SERVER_PROTO
+            valueFrom:
+              configMapKeyRef:
+                name: droneconfigmap
+                key: DRONE_SERVER_PROTO
+          - name: DRONE_USER_CREATE
+            valueFrom:
+              configMapKeyRef:
+                name: droneconfigmap
+                key: DRONE_USER_CREATE
+          - name: DRONE_USER_FILTER
+            valueFrom:
+              configMapKeyRef:
+                name: droneconfigmap
+                key: DRONE_USER_FILTER
+      volumes:
+      - name: drone-volume
+        hostPath:
+          path: /var/lib/drone
+          type: DirectoryOrCreate
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: drone
+  namespace: default
+spec:
+  selector:
+    app: drone
+  ports:
+  - protocol: TCP
+    name: http
+    port: 80
+    targetPort: 80
+  - protocol: TCP
+    name: https
+    port: 443
+    targetPort: 443
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: default-ingress
+  namespace: default
+spec:
+  rules:
+    - host: tokyo.sshcloud.wang
+      http:
+        paths:
+          - backend:
+              serviceName: drone
+              servicePort: 80
+            path: /
+  tls:
+      - hosts:
+          - tokyo.sshcloud.wang
+        secretName: tokyo.sshcloud.wang-tls

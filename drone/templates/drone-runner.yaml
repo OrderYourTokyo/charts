@@ -1,0 +1,153 @@
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: drone
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
+  - delete
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - pods/log
+  verbs:
+  - get
+  - create
+  - delete
+  - list
+  - watch
+  - update
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: drone
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: default
+roleRef:
+  kind: Role
+  name: drone
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone-runner-ssh
+  labels:
+    app: drone-runner
+    type: ssh
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drone-runner
+      type: ssh
+  template:
+    metadata:
+      labels:
+        app: drone-runner
+        type: ssh
+    spec:
+      containers:
+      - name: runner
+        image: drone/drone-runner-ssh:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DRONE_RPC_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: DRONE_RPC_SECRET
+              name: dronesecret
+        - name: DRONE_RUNNER_AGENT_USER
+          valueFrom:
+            secretKeyRef:
+              key: DRONE_RUNNER_AGENT_USER
+              name: dronesecret
+        - name: DRONE_RUNNER_AGENT_PASS
+          valueFrom:
+            secretKeyRef:
+              key: DRONE_RUNNER_AGENT_PASS
+              name: dronesecret
+        - name: DRONE_RUNNER_AGENT_PUBK
+          valueFrom:
+            secretKeyRef:
+              key: DRONE_RUNNER_AGENT_PUBK
+              name: dronesecret
+        - name: DRONE_RPC_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: DRONE_SERVER_HOST
+              name: droneconfigmap
+        - name: DRONE_RPC_PROTO
+          valueFrom:
+            configMapKeyRef:
+              key: DRONE_SERVER_PROTO
+              name: droneconfigmap
+        - name: DRONE_RUNNER_AGENT_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: DRONE_RUNNER_AGENT_HOST
+              name: droneconfigmap
+        - name: DRONE_RPC_SKIP_VERIFY
+          value: "true"
+      nodeSelector:
+        node: master
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone-runner-kube
+  labels:
+    app: drone-runner
+    type: kube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drone-runner
+      type: kube
+  template:
+    metadata:
+      labels:
+        app: drone-runner
+        type: kube
+    spec:
+      containers:
+      - name: runner
+        image: drone/drone-runner-kube:latest
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DRONE_RPC_SECRET
+          valueFrom:
+            secretKeyRef:
+              key: DRONE_RPC_SECRET
+              name: dronesecret
+        - name: DRONE_RPC_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: DRONE_SERVER_HOST
+              name: droneconfigmap
+        - name: DRONE_RPC_PROTO
+          valueFrom:
+            configMapKeyRef:
+              key: DRONE_SERVER_PROTO
+              name: droneconfigmap
+        - name: DRONE_RPC_SKIP_VERIFY
+          value: "true"
+      nodeSelector:
+        node: master

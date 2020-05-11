@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: drone
+  template:
+    metadata:
+      labels:
+        app: drone
+    spec:
+      nodeSelector:
+        node: master
+      containers:
+      - name: drone
+        image: {{ .Values.image.repository }}
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        volumeMounts:
+          - mountPath: /data
+            name: drone-volume
+        env:
+          - name: DRONE_GITHUB_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: dronesecret
+                key: DRONE_GITHUB_CLIENT_ID
+          - name: DRONE_GITHUB_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: dronesecret
+                key: DRONE_GITHUB_CLIENT_SECRET
+          - name: DRONE_RPC_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: dronesecret
+                key: DRONE_RPC_SECRET
+          - name: DRONE_SERVER_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: droneconfigmap
+                key: DRONE_SERVER_HOST
+          - name: DRONE_SERVER_PROTO
+            valueFrom:
+              configMapKeyRef:
+                name: droneconfigmap
+                key: DRONE_SERVER_PROTO
+          - name: DRONE_USER_CREATE
+            valueFrom:
+              configMapKeyRef:
+                name: droneconfigmap
+                key: DRONE_USER_CREATE
+          - name: DRONE_USER_FILTER
+            valueFrom:
+              configMapKeyRef:
+                name: droneconfigmap
+                key: DRONE_USER_FILTER
+      volumes:
+      - name: drone-volume
+        hostPath:
+          path: /var/lib/drone
+          type: DirectoryOrCreate
