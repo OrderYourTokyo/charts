@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.serviceName }}-deployment
+  labels:
+    app: tokyo
+    service: {{ .Values.serviceName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: tokyo
+      service: {{ .Values.serviceName }}
+  template:
+    metadata:
+      labels:
+        app: tokyo
+        service: {{ .Values.serviceName }}
+    spec:
+      nodeSelector:
+        node: slave
+      containers:
+      - name: {{ .Values.serviceName }}
+        image: "{{ .Values.imageRepository }}/{{ .Values.serviceName }}:{{ .Values.imageTag }}"
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: appconfig
+            mountPath: "/app/config.json"
+            subPath: "config.json"
+            readOnly: true
+      imagePullSecrets:
+        - name: tokyo-image-pull-secret
+      volumes:
+        - name: appconfig
+          configMap:
+            name: {{ .Values.serviceName }}-app-configmap
