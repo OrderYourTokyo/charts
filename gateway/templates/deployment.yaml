@@ -9,7 +9,7 @@ metadata:
 spec:
   strategy:
     type: Recreate
-  replica: {{ .Values.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: tokyo
