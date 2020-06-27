@@ -9,6 +9,7 @@ metadata:
 spec:
   strategy:
     type: Recreate
+  replica: 2
   selector:
     matchLabels:
       app: tokyo

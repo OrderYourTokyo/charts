@@ -3,9 +3,9 @@ entries:
   gateway:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-05-11T23:24:02.060883+08:00"
+    created: "2020-06-27T11:03:37.651549+08:00"
     description: A Helm chart for Kubernetes
-    digest: 2c7672a499e67cf2778997ef622450ead11570838d80dee015d26696b47a6cc4
+    digest: d5bbde187c921d1b310f6aa6eb75bc34230cfbce252e5ca7969afe62812e0d6e
     name: gateway
     type: application
     urls:
@@ -14,7 +14,7 @@ entries:
   mysql:
   - apiVersion: v2
     appVersion: 5.7.30
-    created: "2020-05-11T23:24:02.063903+08:00"
+    created: "2020-06-27T11:03:37.654785+08:00"
     description: A Helm chart for Kubernetes
     digest: a8d04cbbaefe643d751997a157da10abe361c2c95e587dc46881085c3b0ab23b
     name: mysql
@@ -25,7 +25,7 @@ entries:
   swagger:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-05-11T23:24:02.066478+08:00"
+    created: "2020-06-27T11:03:37.658446+08:00"
     description: A Helm chart for Kubernetes
     digest: fc1fc5a7f128ace555c2b2c19286f3b88fc801081f7136eaabbe5ea6db57677e
     name: swagger
@@ -36,7 +36,7 @@ entries:
   tokyo:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-05-11T23:24:02.068406+08:00"
+    created: "2020-06-27T11:03:37.660635+08:00"
     description: A Helm chart for Kubernetes
     digest: b60d7933607d701e2030bd0f94e53850cab44614e1e5ca107b72bcc9b60b67f5
     name: tokyo
@@ -44,4 +44,4 @@ entries:
     urls:
     - https://orderyourtokyo.github.io/charts/tokyo-0.1.0.tgz
     version: 0.1.0
-generated: "2020-05-11T23:24:02.058059+08:00"
+generated: "2020-06-27T11:03:37.649291+08:00"
